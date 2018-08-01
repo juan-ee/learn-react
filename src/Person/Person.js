@@ -1,12 +1,13 @@
 import React from 'react';
 import './Person.css';
 
-const Person = (args) => {
+const Person = (props) => {
     return (
         <div className="Person">
-            <p onClick={args.click}>Hello, my name is <strong>{args.name}</strong> and I'm <strong>{args.career}</strong></p>
-            <small>{args.children}</small>
-            <input type="text" onChange={args.change} value={args.name}/>
+            <button className={"danger"} onClick={props.delete}>Remove</button>
+            <p onClick={props.click}>Hello, my name is <strong>{props.name}</strong> and I'm <strong>{props.career}</strong></p>
+            <small>{props.children}</small>
+            <input type="text" onChange={props.change} value={props.name}/>
         </div>
     );
 

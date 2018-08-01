@@ -5,9 +5,9 @@ import Person from './Person/Person';
 class App extends Component {
     state = {
         persons: [
-            {name:'Juan',career:'engineer'},
-            {name:'Asd2',career:'doctor'},
-            {name:'Asd1',career:'nurse'}
+            {id: 'asde', name:'Juan',career:'engineer'},
+            {id: 'dwer', name:'Asd2',career:'doctor'},
+            {id: 'g34g', name:'Asd1',career:'nurse'}
         ],
         showPersons: false,
         selected:0
@@ -17,11 +17,19 @@ class App extends Component {
         this.setState({showPersons: !this.state.showPersons});
     };
 
-    nameChangedHandler = (index,event) => {
-        let updatePersons = this.state.persons;
-        updatePersons[index].name = event.target.value;
+    nameChangedHandler = (event,id) => {
+        const personIndex = this.state.persons.findIndex(p=>p.id===id);
+        const updatedPersons = this.state.persons.slice();
+        updatedPersons[personIndex].name = event.target.value;
+        this.setState({persons: updatedPersons});
+    };
+
+    deletePersonHandler = (index) => {
+        let updatePersons = [...this.state.persons];
+        updatePersons.splice(index,1);
         this.setState({persons: updatePersons});
     };
+
     render() {
         let persons = null;
         const style = {
@@ -35,21 +43,15 @@ class App extends Component {
         if(this.state.showPersons){
             persons = (
                 <div>
-                    <Person
-                        name={this.state.persons[0].name}
-                        career={this.state.persons[0].career}
-                        change={this.nameChangedHandler.bind(this,0)}
-                    />
-                    <Person
-                        name={this.state.persons[1].name}
-                        career={this.state.persons[1].career}
-                        change={this.nameChangedHandler.bind(this,1)}
-                    />
-                    <Person
-                        name={this.state.persons[2].name}
-                        career={this.state.persons[2].career}
-                        change={this.nameChangedHandler.bind(this,2)}
-                    />
+                    {this.state.persons.map((person,index)=>(
+                        <Person
+                            key={person.id}
+                            name={person.name}
+                            career={person.career}
+                            change={(event)=>this.nameChangedHandler(event,person.id)}
+                            delete={this.deletePersonHandler.bind(this,index)}
+                        />
+                    ))}
                 </div>
             );
         }
