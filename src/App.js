@@ -23,6 +23,7 @@ class App extends Component {
         this.setState({persons: updatePersons});
     };
     render() {
+        let persons = null;
         const style = {
             // backgroundColor: 'white',
             font: 'inherit',
@@ -31,22 +32,9 @@ class App extends Component {
             margin: '10px',
             cursor: 'pointer'
         };
-        return (
-            <div className="App">
-                <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1 className="App-title">Hey, Oh ! let's go !</h1>
-                </header>
-                {/*<p className="App-intro">*/}
-                {/*To get started, edit <code>src/App.js</code> and save to reload.*/}
-                {/*</p>*/}
-                <button
-                    style={style}
-                    onClick={this.togglePersonsHandler}>
-                    {!this.state.showPersons ? "Show persons" : "Hide Persons"}
-                </button>
-                {this.state.showPersons ?
-                    <div>
+        if(this.state.showPersons){
+            persons = (
+                <div>
                     <Person
                         name={this.state.persons[0].name}
                         career={this.state.persons[0].career}
@@ -62,9 +50,24 @@ class App extends Component {
                         career={this.state.persons[2].career}
                         change={this.nameChangedHandler.bind(this,2)}
                     />
-                </div> : undefined
-                }
-
+                </div>
+            );
+        }
+        return (
+            <div className="App">
+                <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <h1 className="App-title">Hey, Oh ! let's go !</h1>
+                </header>
+                {/*<p className="App-intro">*/}
+                {/*To get started, edit <code>src/App.js</code> and save to reload.*/}
+                {/*</p>*/}
+                <button
+                    style={style}
+                    onClick={this.togglePersonsHandler}>
+                    {!this.state.showPersons ? "Show persons" : "Hide Persons"}
+                </button>
+                {persons}
             </div>
         );
     }
