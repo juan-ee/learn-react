@@ -43,7 +43,7 @@ class App extends Component {
                 <button
                     style={style}
                     onClick={()=>this.switchNameHandler('BOTON')}>Switch name</button>
-                <Persoqn
+                <Person
                     name={this.state.persons[this.state.selected].name}
                     career={this.state.persons[this.state.selected].career}
                     click={this.switchNameHandler.bind(this,'TEXTO')}
