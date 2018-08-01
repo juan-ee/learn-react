@@ -9,17 +9,17 @@ class App extends Component {
             {name:'Asd2',career:'doctor'},
             {name:'Asd1',career:'nurse'}
         ],
+        showPersons: false,
         selected:0
     };
 
-    switchNameHandler = (pr) => {
-        this.setState({selected: this.state.selected === this.state.persons.length - 1 ? 0 : this.state.selected + 1});
-        console.log(`${pr} ${this.state.selected}`);
+    togglePersonsHandler = () => {
+        this.setState({showPersons: !this.state.showPersons});
     };
 
-    nameChangedHandler = (event) => {
+    nameChangedHandler = (index,event) => {
         let updatePersons = this.state.persons;
-        updatePersons[this.state.selected].name = event.target.value;
+        updatePersons[index].name = event.target.value;
         this.setState({persons: updatePersons});
     };
     render() {
@@ -42,13 +42,29 @@ class App extends Component {
                 {/*</p>*/}
                 <button
                     style={style}
-                    onClick={()=>this.switchNameHandler('BOTON')}>Switch name</button>
-                <Person
-                    name={this.state.persons[this.state.selected].name}
-                    career={this.state.persons[this.state.selected].career}
-                    click={this.switchNameHandler.bind(this,'TEXTO')}
-                    change={this.nameChangedHandler}
-                />
+                    onClick={this.togglePersonsHandler}>
+                    {!this.state.showPersons ? "Show persons" : "Hide Persons"}
+                </button>
+                {this.state.showPersons ?
+                    <div>
+                    <Person
+                        name={this.state.persons[0].name}
+                        career={this.state.persons[0].career}
+                        change={this.nameChangedHandler.bind(this,0)}
+                    />
+                    <Person
+                        name={this.state.persons[1].name}
+                        career={this.state.persons[1].career}
+                        change={this.nameChangedHandler.bind(this,1)}
+                    />
+                    <Person
+                        name={this.state.persons[2].name}
+                        career={this.state.persons[2].career}
+                        change={this.nameChangedHandler.bind(this,2)}
+                    />
+                </div> : undefined
+                }
+
             </div>
         );
     }
