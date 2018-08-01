@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
-import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
     state = {
@@ -41,18 +40,10 @@ class App extends Component {
             border: '1px solid blue',
             padding: '8px',
             margin: '10px',
-            cursor: 'pointer',
-            ':hover': {
-                backgroundColor: 'lightgreen',
-                color:'black'
-            }
+            cursor: 'pointer'
         };
         if(this.state.showPersons){
             style.backgroundColor = 'red';
-            style[':hover'] = {
-                backgroundColor: 'salmon',
-                    color:'black'
-            };
             persons = (
                 <div>
                     {this.state.persons.map((person,index)=>(
@@ -78,26 +69,24 @@ class App extends Component {
         }
 
         return (
-            // <StyleRoot>
-                <div className="App">
-                    <header className="App-header">
-                        <img src={logo} className="App-logo" alt="logo" />
-                        <h1 className="App-title">Hey, Oh ! let's go !</h1>
-                    </header>
-                    <p className={classes.join(' ')}>This is really working</p>
-                    {/*<p className="App-intro">*/}
-                    {/*To get started, edit <code>src/App.js</code> and save to reload.*/}
-                    {/*</p>*/}
-                    <button
-                        style={style}
-                        onClick={this.togglePersonsHandler}>
-                        {!this.state.showPersons ? "Show persons" : "Hide Persons"}
-                    </button>
-                    {persons}
-                </div>
-            /*</StyleRoot>*/
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h1 className="App-title">Hey, Oh ! let's go !</h1>
+                </header>
+                <p className={classes.join(' ')}>This is really working</p>
+                {/*<p className="App-intro">*/}
+                {/*To get started, edit <code>src/App.js</code> and save to reload.*/}
+                {/*</p>*/}
+                <button
+                    style={style}
+                    onClick={this.togglePersonsHandler}>
+                    {!this.state.showPersons ? "Show persons" : "Hide Persons"}
+                </button>
+                {persons}
+            </div>
         );
     }
 }
 
-export default Radium(App);
+export default App;
