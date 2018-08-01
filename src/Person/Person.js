@@ -2,6 +2,8 @@ import React from 'react';
 import classes from './Person.css';
 
 const Person = (props) => {
+    if(Math.random() > 0.9)
+        throw new Error('Mi error !');
     return (
         <div className={classes.Person}>
             <button className={"danger"} onClick={props.delete}>Remove</button>

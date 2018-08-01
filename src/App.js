@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
     state = {
@@ -47,13 +48,15 @@ class App extends Component {
             persons = (
                 <div>
                     {this.state.persons.map((person,index)=>(
-                        <Person
+                        <ErrorBoundary>
                             key={person.id}
+                            <Person
                             name={person.name}
                             career={person.career}
                             change={(event)=>this.nameChangedHandler(event,person.id)}
                             delete={this.deletePersonHandler.bind(this,index)}
                         />
+                        </ErrorBoundary>
                     ))}
                 </div>
             );
